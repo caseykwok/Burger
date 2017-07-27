@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default">
+	<div class="container">
+		<h1 id="header">
+			<img id="logo" src="static/assets/images/burger2.png" alt="Burger" height="55"> Eat-Dat-Burger!
+		</h1>
+	</div>
+</nav>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-5">
+			<h3 id="undevoured-title">Your Order <i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<ul class="list-group">
+				{{#each all}}
+					{{#unless this.devoured}}
+						<form class="form-inline" method="POST" action="/{{this.id}}?_method=PUT">
+							<button class="list-group-item list-group-item-action undevoured-labels" type="submit">
+								{{this.id}}. {{this.burger_name}}
+							</button>
+						</form>
+					{{/unless}}
+				{{/each}}
+			</ul>
+		</div>
+		<div class="col-md-5">
+			<h3 id="devoured-title">Eaten <i class="fa fa-trash" aria-hidden="true"></i></h3>
+			<ul class="list-group">
+				{{#each all}}
+					{{#if this.devoured}}
+						<li class="list-group-item devoured-labels">
+							{{this.id}}. {{this.burger_name}}
+						</li>
+					{{/if}}
+				{{/each}}	
+			</ul>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	<div class="row" id="form-row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<form class="form-group" method="POST" action="/">
+				<div class="input-group">
+					<input class="form-control" id="burger" name="burger" type="text" placeholder="Burger">
+					<span class="input-group-btn"><button type="submit" class="btn btn-default" id="submit" type="submit">Order <i class="fa fa-credit-card" aria-hidden="true"></i></button></span>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>	
+
+</div>
+
